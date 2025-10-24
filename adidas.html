@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8">
+  <title>Adidas - Produkte</title>
+  <style>
+    body {
+      background-image: url(https://png.pngtree.com/background/20250106/original/pngtree-opulent-decorative-texture-design-background-with-a-touch-of-luxury-picture-image_15301831.jpg);
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fdfdfd;
+      background-repeat: no-repeat;
+      background-size: cover;
+      overflow-x: hidden;
+    }
+
+    header {
+      background-color: #111;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .cart-icon {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+      width: 50px;
+      height: 50px;
+    }
+    .cart-icon img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .cart-count {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: red;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 14px;
+      text-align: center;
+      line-height: 20px;
+      font-weight: bold;
+      user-select: none;
+      display: none;
+    }
+
+    section {
+      padding: 30px;
+    }
+
+    h2 {
+      color: #222;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .product-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .product {
+      width: 250px;
+      background: #f7f7f7;
+      border-radius: 5px;
+      padding: 10px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+    }
+
+    .product img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .product-name {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .price {
+      color: #27ae60;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    .cartbtn {
+      border-radius: 20px;
+      background-color: rgb(104, 247, 104);
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .cartbtn:hover {
+      background-color: #7ddb7d;
+    }
+
+    .back {
+      position: relative;
+      left: -47%;
+      color: white;
+    }
+
+    .h1, .h2, .h3 {
+      color: white;
+    }
+
+    .button1 {
+      position: absolute;
+      width: 100px;
+      height: 50px;
+      border-radius: 20px;
+      left: 150px;
+      top: 20px;
+    }
+
+    #cart-modal {
+      display: none;
+      position: fixed;
+      top: 70px;
+      right: 20px;
+      width: 320px;
+      max-height: 80vh;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      padding: 20px;
+      overflow-y: auto;
+      z-index: 1000;
+    }
+
+    #cart-modal h3 {
+      margin-top: 0;
+      text-align: center;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+    }
+
+    .cart-item-name {
+      font-weight: bold;
+      flex: 1;
+    }
+
+    .cart-item-qty {
+      margin: 0 10px;
+    }
+
+    .cart-item-price {
+      color: #27ae60;
+      font-weight: bold;
+      width: 60px;
+      text-align: right;
+    }
+
+    .remove-btn {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      padding: 2px 6px;
+      font-size: 12px;
+      margin-left: 10px;
+      height: 24px;
+      align-self: center;
+    }
+
+    #cart-footer {
+      margin-top: 15px;
+      border-top: 2px solid #333;
+      padding-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    #buy-btn {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #buy-btn:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="miresevini.html"><button class="button1"><p>Go home</p></button></a>
+  <a href="home.html"><p class="back">< Go back</p></a>
+  <h1>Produkte nga adidas</h1>
+  <div class="cart-icon" id="cart-icon" title="View Cart">
+    <img src="https://pngimg.com/d/shopping_cart_PNG4.png" alt="Cart" />
+    <div class="cart-count" id="cart-count">0</div>
+  </div>
+</header>
+
+<section>
+  <h2 class="h1">Patike</h2>
+  <div class="product-list">
+    <div class="product" data-name="Adidas Superstar" data-price="129.99">
+      <img src="https://www.futbolemotion.com/imagesarticulos/219641/grandes/zapatilla-adidas-superstar-xlg-blanco-1.webp" alt="Adidas Superstar">
+      <p class="product-name">Adidas Superstar</p>
+      <p class="price">€129.99</p>
+      <button class="cartbtn">Add to cart</button>
+    </div>
+
+    <div class="product" data-name="Adidas Samba" data-price="64.99">
+      <img src="https://imgix.theurbanlist.com/content/article/adidas-samba-OG.jpg?auto=format%2Ccompress&ixlib=php-4.1.0&w=600" alt="Adidas Samba">
+      <p class="product-name">Adidas Samba</p>
+      <p class="price">€64.99</p>
+      <button class="cartbtn">Add to cart</button>
+    </div>
+
+    <div class="product" data-name="Adidas Ultraboost" data-price="249.99">
+      <img src="https://tradehome.com/cdn/shop/files/GridGuideForHero_67d5926e-3824-4393-b0a7-686df135f2ad.jpg?v=1718301591&width=1200" alt="Adidas Ultraboost">
+      <p class="product-name">Adidas Ultraboost</p>
+      <p class="price">€249.99</p>
+      <button class="cartbtn">Add to cart</button>
+    </div>
+
+    <div class="product" data-name="Adidas Gazelle" data-price="119.99">
+      <img src="https://assets.adidas.com/images/w_600,f_auto,q_auto/73f2b1c3e16f423fa300baed88e28b87_faec/Gazelle_Indoor_Shoes_Black_JI2060_db01_standard.jpg" alt="Adidas Gazelle">
+      <p class="product-name">Adidas Gazelle</p>
+      <p class="price">€119.99</p>
+      <button class="cartbtn">Add to cart</button>
+    </div>
+
+    <div class="product" data-name="Adidas Stan Smith" data-price="84.99">
+      <img src="https://assets.adidas.com/images/w_600,f_auto,q_auto/69721f2e7c934d909168a80e00818569_9366/Stan_Smith_Shoes_White_M20324_01_standard.jpg" alt="Adidas Stan Smith">
+      <p class="product-name">Adidas Stan Smith</p>
+      <p class="price">€84.99</p>
+      <button class="cartbtn">Add to cart</button>
+    </div>
+
+    <div class="product" data-name="Adidas NMD" data-price="59.99">
+      <img src="https://brand.assets.adidas.com/capi/enCA/Images/seo-nmd-sizeguide-bodyimage2_185-545022.jpg" alt="Adidas NMD">
+      <p class="product-name">Adidas NMD</p>
+      <p class="price">€59.99</p>
+      <button class="cartbtn">Add to cart</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="h2">Duksa</h2>
+  <div class="product-list">
+    <div class="product" data-name="Adicolor Hoodie" data-price="59.99">
+      <img src="https://cdn.aboutstatic.com/file/images/3d3509a5f7b97cf309c4ed371fd74e77?brightness=0.96&quality=75&trim=1&height=480&width=360" alt="Adicolor Hoodie">
+      <p class="product-name">Adicolor Hoodie</p>
+      <p class="price">€59.99</p>
+      <button class="cartbtn">Add to cart</button>
+    </div>
+
+    <div class="product" data-name="Teamgeist Hoodie" data-price="64.99">
+      <img src="https://i8.amplience.net/i/jpl/sz_763850_a?qlt=92&w=600&h=464&v=1&fmt=auto" alt="Teamgeist Hoodie">
+      <p class="product-name">Teamgeist Hoodie</p>
+      <p class="price">€64.99</p>
+      <button class="cartbtn">Add to cart</button>
+    </div>
+
+    <div class="product" data-name="Originals Hoodie" data-price="69.99">
+      <img src="https://i.etsystatic.com/31112800/r/il/bf7235/3347782786/il_570xN.3347782786_s039.jpg" alt="Originals Hoodie">
+      <p class="product-name">Originals Hoodie</p>
+      <p class="price">€69.99</p>
+      <button class="cartbtn">Add to cart</button>
+    </div>
+
+    <div class="product" data-name="Performance Hoodie" data-price="74.99">
+      <img src="https://merchandise.ford.com/cdn/shop/files/FD205254_FRONT.jpg?v=1745614933&width=416" alt="Performance Hoodie">
+      <p class="product-name">Performance Hoodie</p>
+      <p class="price">€74.99</p>
+      <button class="cartbtn">Add to cart</button>
+    </div>
+
+    <div class="product" data-name="Zip Hoodie" data-price="59.99">
+      <img src="https://iceplayclothing.com/cdn/shop/files/unisex-heavy-blend-hoodie-black-front-6890cf0a22692.jpg?v=1754320662&width=1946" alt="Zip Hoodie">
+      <p class="product-name">Zip Hoodie</p>
+      <p class="price">€59.99</p>
+      <button class="cartbtn">Add to cart</button>
+    </div>
+
+    <div class="product" data-name="Crewneck" data-price="69.99">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHHnUIjqbXsTZfFfjskVVuvDQGaA35OPc2bA&s" alt="Crewneck">
+      <p class="product-name">Crewneck</p>
+      <p class="price">€69.99</p>
+      <button class="cartbtn">Add to cart</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="h3">Trenerka</h2>
+  <div class="product-list">
+    <div class="product" data-name="Cut Line Pants" data-price="99.99">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhEijvOeCkhrrIIdR-gmNNYuRMrrZ7I5xxQg&s" alt="Cut Line Pants">
+      <p class="product-name">Cut Line Pants</p>
+      <p class="price">€99.99</p>
+      <button class="cartbtn">Add to cart</button>
+    </div>
+
+    <div class="product" data-name="Rasant Pants" data-price="89.99">
+      <img src="https://assets.adidas.com/videos/w_600,f_auto,q_auto/885af7b9b4b5455a8e2c3a9ab47fbe2e_d98c/Rasant_Cut_Line_Track_Pants_Blue_JW9743_video.jpg" alt="Rasant Pants">
+      <p class="product-name">Rasant Pants</p>
+      <p class="price">€89.99</p>
+      <button class="cartbtn">Add to cart</button>
+    </div>
+
+    <div class="product" data-name="3-Stripes Pants" data-price="78.99">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFHKjZdJL5n-JaiTIOw7sHzFavWj3-TsAJjA&s" alt="3-Stripes Pants">
+      <p class="product-name">3-Stripes Pants</p>
+      <p class="price">€78.99</p>
+      <button class="cartbtn">Add to cart</button>
+    </div>
+
+    <div class="product" data-name="Performance Pants" data-price="56.99">
+      <img src="https://teeshoppen.com/cdn/shop/files/ep-performance-pants-12195777-77.png?v=1754575564&width=1536" alt="Performance Pants">
+      <p class="product-name">Performance Pants</p>
+      <p class="price">€56.99</p>
+      <button class="cartbtn">Add to cart</button>
+    </div>
+
+    <div class="product" data-name="Slim Pants" data-price="75.99">
+      <img src="https://shop.jimsformalwear.com/cdn/shop/files/michael-kors-blue-performance-stretch-slim-fit-pants_92a6203a-2d4d-4631-9b39-f0676a178aa9.jpg?v=1710530015&width=1920" alt="Slim Pants">
+      <p class="product-name">Slim Pants</p>
+      <p class="price">€75.99</p>
+      <button class="cartbtn">Add to cart</button>
+    </div>
+
+    <div class="product" data-name="Pants" data-price="63.99">
+      <img src="https://i0.wp.com/fencingvictoria.org.au/wp-content/uploads/2022/08/track-pant.png?fit=412%2C841&ssl=1" alt="Pants">
+      <p class="product-name">Pants</p>
+      <p class="price">€63.99</p>
+      <button class="cartbtn">Add to cart</button>
+    </div>
+  </div>
+</section>
+
+<div id="cart-modal">
+  <h3>Your Cart</h3>
+  <div id="cart-items"></div>
+  <div id="cart-footer">
+    <div>Total: €<span id="cart-total">0.00</span></div>
+    <button id="buy-btn">Buy Now</button>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const cartIcon = document.getElementById('cart-icon');
+    const cartCount = document.getElementById('cart-count');
+    const cartModal = document.getElementById('cart-modal');
+    const cartItemsContainer = document.getElementById('cart-items');
+    const cartTotalEl = document.getElementById('cart-total');
+    const buyBtn = document.getElementById('buy-btn');
+
+    let cart = {};
+
+    function updateCartCount() {
+      const totalCount = Object.values(cart).reduce((acc, item) => acc + item.qty, 0);
+      cartCount.style.display = totalCount > 0 ? 'block' : 'none';
+      cartCount.textContent = totalCount;
+    }
+
+    function updateCartModal() {
+      cartItemsContainer.innerHTML = '';
+      let total = 0;
+      for (const [name, item] of Object.entries(cart)) {
+        const subtotal = item.price * item.qty;
+        total += subtotal;
+
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
+          <div class="cart-item-name">${name}</div>
+          <div class="cart-item-qty">x${item.qty}</div>
+          <div class="cart-item-price">€${subtotal.toFixed(2)}</div>
+          <button class="remove-btn" data-name="${name}">X</button>
+        `;
+        cartItemsContainer.appendChild(div);
+      }
+      cartTotalEl.textContent = total.toFixed(2);
+      updateCartCount();
+    }
+
+    document.querySelectorAll('.cartbtn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        const product = e.target.closest('.product');
+        const name = product.dataset.name;
+        const price = parseFloat(product.dataset.price);
+        if (!cart[name]) {
+          cart[name] = { price, qty: 1 };
+        } else {
+          cart[name].qty++;
+        }
+        updateCartModal();
+      });
+    });
+
+    cartIcon.addEventListener('click', () => {
+      cartModal.style.display = cartModal.style.display === 'block' ? 'none' : 'block';
+    });
+
+    cartItemsContainer.addEventListener('click', e => {
+      if (e.target.classList.contains('remove-btn')) {
+        const name = e.target.dataset.name;
+        delete cart[name];
+        updateCartModal();
+      }
+    });
+
+    buyBtn.addEventListener('click', () => {
+      if (Object.keys(cart).length === 0) {
+        alert('Shporta është bosh!');
+        return;
+      }
+      alert('Faleminderit për blerjen!');
+      cart = {};
+      updateCartModal();
+      cartModal.style.display = 'none';
+    });
+  });
+</script>
+</body>
+</html>
